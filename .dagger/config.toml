@@ -5,5 +5,9 @@
 
 [modules.go-sdk]
 source = "github.com/dagger/go-sdk"
+
 # Marker filename that skips generate when found at or above a Go SDK module root.
 # settings.skipGenerateFilename = ""
+
+[modules.my-module]
+source = "modules/my-module"
