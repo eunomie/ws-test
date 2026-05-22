@@ -26,6 +26,10 @@ func (m *MyModule) ContainerEcho(stringArg string) *dagger.Container {
 	return dag.Container().From("alpine:latest").WithExec([]string{"echo", stringArg})
 }
 
+func (m *MyModule) Print(ctx context.Context, stringArg string) (string, error) {
+        return dag.MyModule().ContainerEcho(stringArg).Stdout(ctx)
+}
+
 // Returns lines that match a pattern in the files of the provided Directory
 func (m *MyModule) GrepDir(ctx context.Context, directoryArg *dagger.Directory, pattern string) (string, error) {
 	return dag.Container().

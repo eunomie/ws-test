@@ -224,6 +224,20 @@ func invoke(ctx context.Context, parentJSON []byte, parentName string, fnName st
 				}
 			}
 			return (*MyModule).GrepDir(&parent, ctx, directoryArg, pattern)
+		case "Print":
+			var parent MyModule
+			err = json.Unmarshal(parentJSON, &parent)
+			if err != nil {
+				panic(fmt.Errorf("%s: %w", "failed to unmarshal parent object", err))
+			}
+			var stringArg string
+			if inputArgs["stringArg"] != nil {
+				err = json.Unmarshal([]byte(inputArgs["stringArg"]), &stringArg)
+				if err != nil {
+					panic(fmt.Errorf("%s: %w", "failed to unmarshal input arg stringArg", err))
+				}
+			}
+			return (*MyModule).Print(&parent, ctx, stringArg)
 		default:
 			return nil, fmt.Errorf("unknown function %s", fnName)
 		}
@@ -242,9 +256,14 @@ func invoke(ctx context.Context, parentJSON []byte, parentName string, fnName st
 						dag.Function("GrepDir",
 							dag.TypeDef().WithKind(dagger.TypeDefKindStringKind)).
 							WithDescription("Returns lines that match a pattern in the files of the provided Directory").
-							WithSourceMap(dag.SourceMap("main.go", 30, 1)).
-							WithArg("directoryArg", dag.TypeDef().WithObject("Directory"), dagger.FunctionWithArgOpts{SourceMap: dag.SourceMap("main.go", 30, 49)}).
-							WithArg("pattern", dag.TypeDef().WithKind(dagger.TypeDefKindStringKind), dagger.FunctionWithArgOpts{SourceMap: dag.SourceMap("main.go", 30, 81)}))), nil
+							WithSourceMap(dag.SourceMap("main.go", 34, 1)).
+							WithArg("directoryArg", dag.TypeDef().WithObject("Directory"), dagger.FunctionWithArgOpts{SourceMap: dag.SourceMap("main.go", 34, 49)}).
+							WithArg("pattern", dag.TypeDef().WithKind(dagger.TypeDefKindStringKind), dagger.FunctionWithArgOpts{SourceMap: dag.SourceMap("main.go", 34, 81)})).
+					WithFunction(
+						dag.Function("Print",
+							dag.TypeDef().WithKind(dagger.TypeDefKindStringKind)).
+							WithSourceMap(dag.SourceMap("main.go", 29, 1)).
+							WithArg("stringArg", dag.TypeDef().WithKind(dagger.TypeDefKindStringKind), dagger.FunctionWithArgOpts{SourceMap: dag.SourceMap("main.go", 29, 47)}))), nil
 	default:
 		return nil, fmt.Errorf("unknown object %s", parentName)
 	}

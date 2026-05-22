@@ -12,6 +12,7 @@ type MyModule struct { // my-module (../../../../../:0:0)
 	query *querybuilder.Selection
 
 	grepDir *string
+	print   *string
 }
 
 func (r *MyModule) WithGraphQLQuery(q *querybuilder.Selection) *MyModule {
@@ -48,6 +49,19 @@ func (r *MyModule) GrepDir(ctx context.Context, pattern string, opts ...MyModule
 		}
 	}
 	q = q.Arg("pattern", pattern)
+
+	var response string
+
+	q = q.Bind(&response)
+	return response, q.Execute(ctx)
+}
+
+func (r *MyModule) Print(ctx context.Context, stringArg string) (string, error) {
+	if r.print != nil {
+		return *r.print, nil
+	}
+	q := r.query.Select("print")
+	q = q.Arg("stringArg", stringArg)
 
 	var response string
 
