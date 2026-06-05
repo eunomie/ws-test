@@ -1,7 +1,0 @@
-[["version","1"]]
-["","container.from",["docker.io/library/alpine:latest","linux/arm64"],"sha256:5b10f432ef3da1b8d4c7eb6c487f2f5a8f096bc91145e68878dd4a5019afde11","pin"]
-["","container.from",["docker.io/library/golang:1.25-alpine","linux/arm64"],"sha256:8d22e29d960bc50cd025d93d5b7c7d220b1ee9aa7a239b3c8f55a57e987e8d45","pin"]
-["","git.head",["https://github.com/dagger/go-sdk"],"7df7aacc386448de6a9367e6179a08e318cfe607","float"]
-["","git.head",["https://github.com/dagger/sdk-sdk"],"2f1d2ab624d6303c6354ff95520e591fe7f1fb3d","float"]
-["","modules.resolve",["github.com/dagger/go-sdk"],"7df7aacc386448de6a9367e6179a08e318cfe607","float"]
-["","modules.resolve",["github.com/dagger/sdk-sdk/polyfill"],"2f1d2ab624d6303c6354ff95520e591fe7f1fb3d","float"]
