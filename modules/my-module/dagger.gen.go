@@ -227,6 +227,20 @@ func invoke(ctx context.Context, parentJSON []byte, parentName string, fnName st
 				}
 			}
 			return (*MyModule).GrepDir(&parent, ctx, directoryArg, pattern)
+		case "Print":
+			var parent MyModule
+			err = json.Unmarshal(parentJSON, &parent)
+			if err != nil {
+				panic(fmt.Errorf("%s: %w", "failed to unmarshal parent object", err))
+			}
+			var stringArg string
+			if inputArgs["stringArg"] != nil {
+				err = json.Unmarshal([]byte(inputArgs["stringArg"]), &stringArg)
+				if err != nil {
+					panic(fmt.Errorf("%s: %w", "failed to unmarshal input arg stringArg", err))
+				}
+			}
+			return (*MyModule).Print(&parent, ctx, stringArg)
 		default:
 			return nil, fmt.Errorf("unknown function %s", fnName)
 		}
