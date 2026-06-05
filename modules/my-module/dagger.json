@@ -1,0 +1,13 @@
+{
+  "name": "my-module",
+  "engineVersion": "v1.0.0-beta.3",
+  "sdk": {
+    "source": "go",
+    "experimental": {
+      "SELF_CALLS": true
+    }
+  },
+  "codegen": {
+    "automaticGitignore": false
+  }
+}
