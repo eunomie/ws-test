@@ -1,0 +1,9 @@
+name = "my-mod"
+engineVersion = "v1.0.0-20260620184006-dev-7d298df17db6"
+
+[runtime]
+  source = "go"
+
+[[dependencies]]
+  name = "my-dep"
+  source = "../my-dep"

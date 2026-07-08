@@ -12,8 +12,20 @@ source = "github.com/dagger/go-sdk"
 [modules.my-module]
 source = ".dagger/modules/my-module"
 
+[modules.my-mod]
+source = ".dagger/modules/my-mod"
+
+[modules.my-dep]
+source = ".dagger/modules/my-dep"
+
 [modules.dagger-go-sdk.as-sdk]
 name = "go"
 
 [[modules.dagger-go-sdk.as-sdk.modules]]
 path = ".dagger/modules/my-module"
+
+[[modules.dagger-go-sdk.as-sdk.modules]]
+path = ".dagger/modules/my-mod"
+
+[[modules.dagger-go-sdk.as-sdk.modules]]
+path = ".dagger/modules/my-dep"
