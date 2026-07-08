@@ -7,3 +7,6 @@ engineVersion = "v1.0.0-20260620184006-dev-7d298df17db6"
 [[dependencies]]
   name = "my-dep"
   source = "../my-dep"
+
+[codegen]
+  automaticGitignore = false
